@@ -1,0 +1,7 @@
+- Daniel Lemire - <https://lemire.me/blog>
+- Julia Evans - <https://jvns.ca>
+- Max Bernstein - <https://bernsteinbear.com/blog>
+- Michael Stapelberg - <https://michael.stapelberg.ch/posts>
+- Gwen Weinholt - <https://weinholt.se>
+- LWN.net - <https://lwn.net>
+- Dan Luu - <https://danluu.com>
