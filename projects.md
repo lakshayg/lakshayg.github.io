@@ -1,0 +1,1 @@
+- lakshayg/vim-bazel - <https://github.com/lakshayg/vim-bazel>
