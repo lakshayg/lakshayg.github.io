@@ -1,1 +1,2 @@
-[interesting blogs](interesting-blogs.md)
+- [interesting blogs](interesting-blogs.md)
+- [board games](board-games.md)
