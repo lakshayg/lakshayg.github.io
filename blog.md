@@ -1,0 +1,5 @@
+- 2023-12-30 - [Debugging using segfault](blog/2023-12-30-debugging-using-segfaults.md)
+- 2023-06-08 - [C++ memory_order](blog/2023-06-08-c++-atomics-memory-ordering.md)
+- 2020-11-03 - [Sollya](blog/2020-11-03-sollya.md)
+- 2020-08-11 - [Test for divisibility by 7](blog/2020-08-11-divisibility-test-for-7.md)
+- 2020-04-07 - [Mathematica plugin for TeXmacs](blog/2020-04-07-texmacs-mathematica-plugin.md)

@@ -1,3 +1,4 @@
 - [interesting blogs](interesting-blogs.md)
 - [board games](board-games.md)
 - [projects](projects.md)
+- [blog](blog.md)
