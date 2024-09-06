@@ -1,6 +1,6 @@
 Recently I had the need to debug issues in a codebase that did not produce backtraces. I was able to get the backtrace by manually triggering a segfault and using `catchsegv`.
 
-```
+```cpp
 #include <signal.h>
 
 void foo()
@@ -14,7 +14,7 @@ void foo()
 
 Now run this binary under `catchsegv`. I was using `bazel` as my build system so this could be done using:
 
-```
+```sh
 bazel run --run_under=catchsegv :target
 ```
 

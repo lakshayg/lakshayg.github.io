@@ -130,7 +130,7 @@ On starting the Mathematica session I get the text "Mathematica" and the usual m
 
 Out of curiosity, I check `src.lazy/tm_mathematica.c` and there I see
 
-```
+```cpp
   fputs("\2latex:\\red Mathematica",stdout);
 
   while (1) {
