@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "My most used jj commands",
+        "datePublished": "2026-10-19",
+        "dateModified": "2026-10-21",
+        "author": {"@type": "Person", "name": "Lakshay Garg", "url": "https://lakshayg.com/"}
+      }
+    </script>
+    <style>
+      dd { margin-top: 0.5em; margin-bottom: 1em; }
+    </style>
+    <title>My most used jj commands</title>
+  </head>
+  <body>
+    <h1>My most used <code>jj</code> commands</h1>
+
+    <p>
+      I started using <a href="https://jj-vcs.dev">jj-vcs</a> <time datetime="2026-08">about two months ago</time>.
+      Getting used to it took me about 3 weeks of using it exclusively. When I was just starting I found this blog
+      from Danver Braganza about their <a href="https://danverbraganza.com/writings/most-frequent-jj-commands">
+      most commonly used <code>jj</code> commands</a> which helped me a lot in figuring out which commands to
+      actually focus on. Now that I have been using it for a while and feel pretty comfortable, I thought I would
+      make a list of the commands I use most frequently since <code>jj</code> has been evolving pretty fast and
+      I converged on a slightly different workflow. I did not do a systematic analysis like Danver and instead
+      just jotted down the commands that came to my mind. The following is a list of those commands and how I use
+      them in my workflow. This is not a tutorial.
+    </p>
+
+    <dl>
+      <dt><code>jj new</code></dt>
+      <dd>
+        This is the main command for creating new commits. When you are done working on a commit, you add a child
+        commit using <code>new</code>. Coming from git it might be surprising but this is also the command you use to
+        create what would be called a "branch" in git. You just say <code>jj new BRANCH_POINT</code> and you have
+        just started another line of change from that BRANCH_POINT. Even more surprisingly, you will be using this
+        command when you want to check out some old commit by creating a new empty commit on top of that commit and
+        browsing the files there. Having to create empty commits just to read felt strange initially but <code>jj
+        </code> automatically garbage collect empty commits so you don't need to worry about filling up your history
+        with empty commits. <code>new</code> is also used to create merge commits <code>jj new PARENT_A PARENT_B ...
+        </code> and it can also be used to insert commits between two commits <code>jj new -A PRED -B SUCC</code>.
+      </dd>
+
+      <dt><code>jj st[atus]</code></dt>
+      <dd>
+        The output of this command is essentially like <code>git status</code>. The only difference being that <code>
+        jj</code> does not have a staging area like git.
+      </dd>
+
+      <dt><code>jj log</code></dt>
+      <dd>
+        As one would expect, this shows some commits but it's different if you are used to <code>git log</code>. The
+        output is closer to what you would see with <code>git log --all --oneline --graph</code>. I personally found
+        the default output a little too verbose so I set <code>templates.log = "builtin_log_oneline"</code> in my
+        config. Once you are familiar with <a href="https://jj-vcs.github.io/jj/latest/revsets/">revsets</a>, you
+        can use it to do everything you could do with <code>git log</code>.
+      </dd>
+
+      <dt><code>jj desc[ribe]</code></dt>
+      <dd>
+        This is the command you use to set the commit title and message. There's a <code>jj commit</code> command that
+        can be used as well which does <code>describe</code> followed by <code>new</code>.
+      </dd>
+
+      <dt><code>jj edit</code></dt>
+      <dd>
+        This lets you change any revision. You can use this to go to a revision and browse the changes but I prefer
+        using <code>jj new</code> for that purpose since you don't have to worry about accidentally changing the
+        revision.
+      </dd>
+
+      <dt><code>jj show</code> and <code>jj diff</code></dt>
+      <dd>These are essentially the same as what the corresponding git commands do.</dd>
+
+      <dt><code>jj undo</code></dt>
+      <dd>
+        Every time a command goes wrong, this is what I use to get back to a sane state. A more advanced version of
+        what this command does is through the <a href="https://docs.jj-vcs.dev/latest/operation-log/">operation log
+        </a>.
+      </dd>
+
+      <!--
+      <dt><code>jj abandon</code></dt>
+      <dd>This command throws away a revision.</dd>
+
+      <dt><code>jj restore FILE</code></dt>
+      <dd>suppors a --from option</dd>
+
+      <dt><code>jj squash --into REV FILE</code></dt>
+      <dd>Bla bla</dd>
+
+      <dt><code>jj split -i</code></dt>
+      <dd>Bla bla. Supports a -i flag</dd>
+
+      <dt><code>jj duplicate REV [-o|-A|-B] REV</code></dt>
+      <dd>Bla bla</dd>
+      -->
+
+      <dt><code>jj rebase [<u>-s</u>|-b|-r] REV [<u>-o</u>|-A|-B] REV</code></dt>
+      <dd>
+        Rebasing with jj feels simpler than with git. It makes it possible to rebase a number of "branches" at once,
+        reorder commits, insert commits in the middle of other commits and so on. Conflicts are handled as first class
+        citizens in jj so any conflicts picked up during the rebase don't require immediate resolution. The commandline
+        interface is quite intuitive as well. You specify what to rebase and where to place it. When you want to
+        rebase a branch, you can refer to it using its base (-s|--source) or tip (-b|--branch). If you want to move a
+        single commit, you refer to it using -r|--revision. The commits can be placed onto a commit using -o|--onto
+        or inserted after/before a commit using -A|--insert-after and -B|--insert-before. Note that --insert-after is
+        different from --onto.
+      </dd>
+
+      <dt><code>jj git push --named NAME=REV</code></dt>
+      <dd>
+        This is the command I use to push a branch to github. This creates a bookmark NAME which points at REV and
+        pushes the branch. These steps can be done separately but since jj does not need you to name branches by
+        default, you don't need to create a bookmark unless you wish to push. Other variations of this command can
+        autogenerate a name but I prefer naming my branches myself.
+      </dd>
+
+      <dt><code>jj git push -b BOOKMARK</code></dt>
+      <dd>
+        This command pushes a bookmark. I use this when I update a branch with new commits and want to push them to
+        the remote.
+      </dd>
+
+      <dt><code>jj bookmark advance</code></dt>
+      <dd>
+        In git, branches advance as you add more commits to them. In jj, bookmarks are static, they don't move unless
+        you explicitly move them. The advance command looks at the ancestors until it finds a bookmark and changes that
+        bookmark to point to the current revision. You can also specify a revision to move the bookmark to if you don't
+        want it to be the current revision.
+      </dd>
+    </dl>
+  </body>
+</html>
