@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://lakshayg.com/sitemap.xml
