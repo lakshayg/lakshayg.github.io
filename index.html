@@ -100,50 +100,44 @@
       }
     </script>
     <style>
-      /* Limiting the body width and centering it to make it easy to read */
       body {
-        max-width: 40em;
-        margin: auto auto;
-        padding: 0 1em;
+        max-width: 40em; /* better readability */
+        margin: auto;    /* move body to the center */
+        padding: 0 1em;  /* prevent content from touching the border */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;     /* vertical alignment in each flexbox row */
+        justify-content: center; /* horizontal alignment in each flexbox row */
+        gap: 0 1.5em;            /* spacing between elements of the flexbox */
       }
-
-      /* show image and text side-by-side for wide screens (2 cols) */
-      .container {
-        display: grid;
-        grid-template-columns: 200px auto;
-        gap: 2em;
+      h1 {
+        flex-basis: 100%; /* force a flex break by using up full width */
       }
-
-      /* stack image and text for narrow screens (1 col) */
-      @media(max-width: 35em) {
-        .container {
-          grid-template-columns: auto;
-          gap: 0;
-        }
+      main {
+        flex: 1;          /* fill remaining width after the picture */
+        min-width: 20em;  /* break row when the width is too small */
       }
     </style>
     <title>Lakshay Garg</title>
   </head>
   <body>
     <h1>Lakshay Garg</h1>
-    <main class="container">
-      <img src="me.avif" alt="Lakshay Garg's profile picture" width=200 height=200 fetchpriority=high>
-      <div>
-        <p>
-          Hi there, my name is Lakshay. I am currently a software engineer at NVIDIA, working on
-          <a href="https://github.com/pytorch/pytorch/pulls/lakshayg">PyTorch</a> to make
-          sure it works well on NVIDIA hardware. I have previously worked on autonomous vehicles at
-          <a href="https://zoox.com">Zoox</a>.
-        </p>
-        <p>
-          I am interested in computer architecture, compilers, and programming languages.
-        </p>
-        <p>
-          <a href="https://github.com/lakshayg">GitHub</a> &sdot;
-          <a href="https://linkedin.com/in/lakshayg">LinkedIn</a> &sdot;
-          <a href="/posts/">Blog</a>
-        </p>
-      </div>
-    </div>
+    <img src="me.avif" alt="Lakshay Garg's profile picture" width=200 height=200 fetchpriority=high>
+    <main>
+      <p>
+        Hi there, my name is Lakshay. I am currently a software engineer at NVIDIA, working on
+        <a href="https://github.com/pytorch/pytorch/pulls/lakshayg">PyTorch</a> to make
+        sure it works well on NVIDIA hardware. I have previously worked on autonomous vehicles at
+        <a href="https://zoox.com">Zoox</a>.
+      </p>
+      <p>
+        I am interested in computer architecture, compilers, and programming languages.
+      </p>
+      <p>
+        <a href="https://github.com/lakshayg">GitHub</a> &sdot;
+        <a href="https://linkedin.com/in/lakshayg">LinkedIn</a> &sdot;
+        <a href="/posts/">Blog</a>
+      </p>
+    </main>
   </body>
 </html>
